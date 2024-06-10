@@ -8,6 +8,7 @@
     box-sizing: border-box;
 }
 
+
 body {
     background-image: url(../img/pexels-karolina-grabowska-5387258.jpg);
     background-position: center;
@@ -139,7 +140,7 @@ input, select {
     justify-content: space-around;
     align-items: center;
     padding: 1rem;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #ccc;
     transition: .3s;
 }
 

@@ -5,6 +5,7 @@ const todoList = document.querySelector("#todo-list");
 const editForm = document.querySelector("#edit-form");
 const editInput = document.querySelector("#edit-input");
 const cancelEditBtn = document.querySelector("#cancel-edit-btn");
+const inputBusca = document.querySelector("#search-input");
 
 let oldInputValue;
 
@@ -19,16 +20,19 @@ const saveTodo = (text) => {
     todo.appendChild(todoTitle);
 
     const doneBtn = document.createElement("button");
+    doneBtn.id = ("botao1");
     doneBtn.classList.add("finish-todo");
     doneBtn.innerHTML = '<i class="fa-solid fa-check"></i>';
     todo.appendChild(doneBtn);
 
     const editBtn = document.createElement("button");
+    editBtn.id = ("botao2");
     editBtn.classList.add("edit-todo");
     editBtn.innerHTML = '<i class="fa-solid fa-pen"></i>';
     todo.appendChild(editBtn);
 
     const deleteBtn = document.createElement("button");
+    deleteBtn.id = ("botao3");
     deleteBtn.classList.add("remove-todo");
     deleteBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
     todo.appendChild(deleteBtn);
@@ -38,7 +42,7 @@ const saveTodo = (text) => {
     todoInput.value = "";
     todoInput.focus();
 
-
+    
 }
 
 const toggleForms = () => {
@@ -122,4 +126,31 @@ editForm.addEventListener("submit", (e) => {
     }
 
     toggleForms()
+});
+
+
+inputBusca.addEventListener('keyup', () => {
+    let expressão = inputBusca.value.toLowerCase();
+
+    let linhas = todoList.getElementsByTagName("h3");
+
+    for (let posicao in linhas) {
+        if (true === isNaN(posicao)) {
+            continue;
+        }
+        
+        let conteudoDaLinha = linhas[posicao].innerHTML.toLowerCase();
+        let elementoTodo = linhas[posicao].closest('.todo'); 
+        let botoes = elementoTodo.querySelectorAll('button'); 
+
+        if (conteudoDaLinha.includes(expressão)) {
+            elementoTodo.style.display = "flex"; 
+            linhas[posicao].style.display = "";
+            botoes.forEach(botao => botao.style.display = "");
+        } else {
+            elementoTodo.style.display = "none"; 
+            linhas[posicao].style.display = "none";
+            botoes.forEach(botao => botao.style.display = "none");
+        }
+    }
 });
